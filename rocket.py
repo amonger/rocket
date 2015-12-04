@@ -125,7 +125,3 @@ class CircusRocket(AbstractRocket):
     RIGHT_DOWN = 10
     RIGHT_SLOW = 11
     STOP = 12
-
-rocket = CircusRocket()
-rocketManager = RocketManager(rocket)
-rocketManager.up()
