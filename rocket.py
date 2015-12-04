@@ -49,12 +49,18 @@ class AbstractRocket:
 
 class RocketManager:
     def __init__(self, rocket):
-       self.rocket = rocket
-       for bus in usb.busses():
-           for dev in bus.devices:
-               if dev.idVendor == self.rocket.get_vendor_id() and dev.idProduct == self.rocket.get_product_id():
-                   self.handle = dev.open()
-                   print 'Device Primed: ' + self.rocket.get_name()
+        self.rocket = rocket
+        device_found = False
+        for bus in usb.busses():
+            for dev in bus.devices:
+                if dev.idVendor == self.rocket.get_vendor_id() and dev.idProduct == self.rocket.get_product_id():
+                    device_found = True
+                    self.handle = dev.open()
+                    print 'Device Primed: ' + self.rocket.get_name()
+
+        if (device_found == False):
+            print 'Device Not Found: ' + self.rocket.get_name()
+            sys.exit(0)
 
     def issue_command(self, command):
         try:
