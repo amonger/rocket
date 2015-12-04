@@ -1,7 +1,11 @@
-from flask import Flask
+from flask import Flask, render_template
 from rocket import *
 
 app = Flask(__name__)
+
+@app.route("/")
+def index():
+    return render_template('index.html')
 
 @app.route("/up/<int:seconds>")
 def up(seconds):
@@ -32,6 +36,13 @@ def right(seconds):
     rocketManager.right().sleep(1).stop()
     return "right"
 
+@app.route("/stop")
+def stop():
+    rocket = CircusRocket()
+    rocketManager = RocketManager(rocket)
+    rocketManager.stop()
+    return "stop"
 
+app.debug = True
 if __name__ == "__main__":
     app.run()

@@ -81,7 +81,7 @@ class RocketManager:
         return self.issue_command(self.rocket.left(), 'LEFT')
 
     def left_up(self):
-        return self.issue_command(self.rocket.left_up(), 'RIGHT')
+        return self.issue_command(self.rocket.left_up(), 'LEFT UP')
 
     def left_down(self):
         return self.issue_command(self.rocket.left_down(), 'LEFT DOWN')
