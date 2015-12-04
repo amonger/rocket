@@ -56,50 +56,57 @@ class RocketManager:
                 if dev.idVendor == self.rocket.get_vendor_id() and dev.idProduct == self.rocket.get_product_id():
                     device_found = True
                     self.handle = dev.open()
-                    print 'Device Primed: ' + self.rocket.get_name()
+                    print 'Device Assigned: ' + self.rocket.get_name()
 
         if (device_found == False):
             print 'Device Not Found: ' + self.rocket.get_name()
             sys.exit(0)
 
-    def issue_command(self, command):
+    def issue_command(self, command, command_name):
         try:
+            print 'Issuing Command: ' + command_name
             self.handle.controlMsg(0x21, 0x09, [command], 0x0200)
         except usb.USBError, e:
             pass
 
+        return self
+
     def up(self):
-        return self.issue_command(self.rocket.up())
+        return self.issue_command(self.rocket.up(), 'UP')
 
     def down(self):
-        return self.issue_command(self.rocket.down())
+        return self.issue_command(self.rocket.down(), 'DOWN')
 
     def left(self):
-        return self.issue_command(self.rocket.left())
+        return self.issue_command(self.rocket.left(), 'LEFT')
 
     def left_up(self):
-        return self.issue_command(self.rocket.left_up())
+        return self.issue_command(self.rocket.left_up(), 'RIGHT')
 
     def left_down(self):
-        return self.issue_command(self.rocket.left_down())
+        return self.issue_command(self.rocket.left_down(), 'LEFT DOWN')
 
     def left_slow(self):
-        return self.issue_command(self.rocket.left_slow())
+        return self.issue_command(self.rocket.left_slow(), 'LEFT SLOW')
 
     def right(self):
-        return self.issue_command(self.rocket.right())
+        return self.issue_command(self.rocket.right(), 'RIGHT')
 
     def right_up(self):
-        return self.issue_command(self.rocket.right_up())
+        return self.issue_command(self.rocket.right_up(), 'RIGHT UP')
 
     def right_down(self):
-        return self.issue_command(self.rocket.right_down())
+        return self.issue_command(self.rocket.right_down(), 'RIGHT DOWN')
 
     def right_slow(self):
-        return self.issue_command(self.rocket.right_slow())
+        return self.issue_command(self.rocket.right_slow(), 'RIGHT SLOW')
 
     def stop(self):
-        return self.issue_command(self.rocket.stop())
+        return self.issue_command(self.rocket.stop(), 'STOP')
+
+    def sleep(self, timeout):
+        time.sleep(timeout)
+        return self
 
 class CircusRocket(AbstractRocket):
     NAME = "Circus Rocket"
