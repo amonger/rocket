@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    </title>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js" charset="utf-8"></script>
+</head>
+<body>
+    <button data-action="up">Up</button>
+    <button data-action="down">Down</button>
+    <button data-action="left">Left</button>
+    <button data-action="right">Right</button>
+    <button data-action="stop">Stop</button>
+
+    <script>
+        $('[data-action]').click(function(){
+            var action = $(this).data('action');
+
+            $.get('/' + action + '/1');
+        });
+    </script>
+</body>
+</html>
